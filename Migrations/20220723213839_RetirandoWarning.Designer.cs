@@ -4,14 +4,16 @@ using Consultorio.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Consultorio.Migrations
 {
     [DbContext(typeof(ConsultorioDbContext))]
-    partial class ConsultorioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220723213839_RetirandoWarning")]
+    partial class RetirandoWarning
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
