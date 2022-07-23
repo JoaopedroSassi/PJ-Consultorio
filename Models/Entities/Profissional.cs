@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Consultorio.Models.Entities
 {
-   public class Profissional
+   public class Profissional : Base
     {
         public string Nome { get; set; }
         public bool Ativo { get; set; }

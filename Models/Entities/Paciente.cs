@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Consultorio.Models.Entities
 {
-   public class Paciente
+   public class Paciente : Base
     {
         public string Nome { get; set; }
         public string Email { get; set; }
