@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Consultorio.Models.Entities
 {
-    public class Consultorio
+    public class Consulta
     {
         
     }
