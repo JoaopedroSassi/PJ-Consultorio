@@ -25,7 +25,8 @@ namespace Consultorio
             services.AddControllers();
             services.AddDbContext<ConsultorioDbContext>(opt =>
             {
-                opt.UseSqlServer(Configuration.GetConnectionString("Default"));
+                opt.UseSqlServer(Configuration.GetConnectionString("Default"), 
+                assembly => assembly.MigrationsAssembly(typeof(ConsultorioDbContext).Assembly.FullName));
             });
             services.AddCors();
             services.AddScoped<IEmailService, EmailService>();
