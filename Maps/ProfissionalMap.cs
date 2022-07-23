@@ -15,7 +15,7 @@ namespace Consultorio.Maps
             base.Configure(builder);
 
             builder.Property(x => x.Nome).HasColumnType("varchar(150)").IsRequired();
-            builder.Property(x => x.Ativo).HasDefaultValue(true);
+            builder.Property(x => x.Ativo);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Consultorio.Maps
             base.Configure(builder);
 
             builder.Property(x => x.Nome).IsRequired();
-            builder.Property(x => x.Ativa).HasDefaultValue(true);
+            builder.Property(x => x.Ativa);
         }
    }
 }
