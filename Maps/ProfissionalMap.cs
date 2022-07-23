@@ -16,6 +16,24 @@ namespace Consultorio.Maps
 
             builder.Property(x => x.Nome).HasColumnType("varchar(150)").IsRequired();
             builder.Property(x => x.Ativo);
+
+            builder.HasMany(x => x.Especialidades)
+                   .WithMany(x => x.Profissionais)
+                   .UsingEntity<ProfissionalEspecialidade>(
+                        x => x.HasOne(e => e.Especialidade).WithMany().HasForeignKey(x => x.EspecialidadeId),
+
+                        x => x.HasOne(p => p.Profissionais).WithMany().HasForeignKey(p => p.ProfissionalId),
+                        
+                        x => 
+                        {
+                            x.ToTable("tb_profissional_especialidade");
+
+                            x.HasKey(x => new {x.ProfissionalId, x.EspecialidadeId});
+
+                            x.Property(e => e.EspecialidadeId).IsRequired();
+                            x.Property(p => p.ProfissionalId).IsRequired();
+                        }
+                    ); 
         }
     }
 }
