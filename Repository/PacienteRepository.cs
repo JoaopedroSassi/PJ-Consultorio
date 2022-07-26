@@ -3,6 +3,7 @@ using System.Linq;
 using Consultorio.Context;
 using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Consultorio.Repository
 {
@@ -16,11 +17,11 @@ namespace Consultorio.Repository
 		}
 
 		public IEnumerable<Paciente> GetAll()
-			=> _context.Pacientes.ToList();
+			=> _context.Pacientes.Include(x => x.Consultas).ToList();
 
 		public Paciente GetById(int id)
 		{
-			Paciente paciente = _context.Pacientes.FirstOrDefault(x => x.Id == id);
+			Paciente paciente = _context.Pacientes.Include(x => x.Consultas).FirstOrDefault(x => x.Id == id);
 
 			if (paciente is null)
 				return null;
