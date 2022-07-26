@@ -23,8 +23,10 @@ namespace Consultorio
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-
-			services.AddControllers();
+			services.AddControllers().AddNewtonsoftJson(opt =>
+			{
+				opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+			});
 			services.AddDbContext<ConsultorioDbContext>(opt =>
 			{
 				opt.UseSqlServer(Configuration.GetConnectionString("Default"),
