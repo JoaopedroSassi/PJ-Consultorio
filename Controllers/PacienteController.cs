@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Consultorio.Controllers
 {
@@ -22,9 +19,9 @@ namespace Consultorio.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult<Paciente> Get()
+		public async Task<ActionResult<Paciente>> GetAsync()
 		{
-			IEnumerable<Paciente> pacientes = _repository.GetAll();
+			IEnumerable<Paciente> pacientes = await _repository.GetAllPacientesAsync();
 
 			if (pacientes.Any())
 				return Ok(pacientes);
@@ -33,9 +30,9 @@ namespace Consultorio.Controllers
 		}
 
 		[HttpGet("{id:int}")]
-		public ActionResult<Paciente> GetById(int id)
+		public async Task<ActionResult<Paciente>> GetByIdAsync(int id)
 		{
-			Paciente paciente = _repository.GetById(id);
+			Paciente paciente = await _repository.GetPacienteByIdAsync(id);
 
 			if (paciente is not null)
 				return Ok(paciente);

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Consultorio.Context;
 using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
@@ -16,12 +16,12 @@ namespace Consultorio.Repository
 			_context = context;
 		}
 
-		public IEnumerable<Paciente> GetAll()
-			=> _context.Pacientes.Include(x => x.Consultas).ToList();
+		public async Task<IEnumerable<Paciente>> GetAllPacientesAsync()
+			=> await _context.Pacientes.Include(x => x.Consultas).ToListAsync();
 
-		public Paciente GetById(int id)
+		public async Task<Paciente> GetPacienteByIdAsync(int id)
 		{
-			Paciente paciente = _context.Pacientes.Include(x => x.Consultas).FirstOrDefault(x => x.Id == id);
+			Paciente paciente = await _context.Pacientes.Include(x => x.Consultas).FirstOrDefaultAsync(x => x.Id == id);
 
 			if (paciente is null)
 				return null;
