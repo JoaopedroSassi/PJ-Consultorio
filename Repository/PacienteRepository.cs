@@ -17,11 +17,11 @@ namespace Consultorio.Repository
 		}
 
 		public async Task<IEnumerable<Paciente>> GetAllPacientesAsync()
-			=> await _context.Pacientes.Include(x => x.Consultas).ToListAsync();
+			=> await _context.Pacientes.AsNoTracking().Include(x => x.Consultas).ToListAsync();
 
 		public async Task<Paciente> GetPacienteByIdAsync(int id)
 		{
-			Paciente paciente = await _context.Pacientes.Include(x => x.Consultas).FirstOrDefaultAsync(x => x.Id == id);
+			Paciente paciente = await _context.Pacientes.AsNoTracking().Include(x => x.Consultas).FirstOrDefaultAsync(x => x.Id == id);
 
 			if (paciente is null)
 				return null;
