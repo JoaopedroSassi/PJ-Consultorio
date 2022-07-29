@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Consultorio.Models.Dto;
-using Consultorio.Models.Dto.Paciente;
 using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;

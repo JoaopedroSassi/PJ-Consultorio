@@ -1,5 +1,5 @@
 using AutoMapper;
-using Consultorio.Models.Dto.Paciente;
+using Consultorio.Models.Dto;
 using Consultorio.Models.Entities;
 
 namespace Consultorio.Helpers
