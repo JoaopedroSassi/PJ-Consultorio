@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Consultorio.Models.Dto;
+using Consultorio.Models.Dto.Paciente;
 using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +21,9 @@ namespace Consultorio.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<Paciente>> GetAsync()
+		public async Task<ActionResult<PacienteDto>> GetAsync()
 		{
-			IEnumerable<Paciente> pacientes = await _repository.GetAllPacientesAsync();
+			IEnumerable<PacienteDto> pacientes = await _repository.GetAllPacientesAsync();
 
 			if (pacientes.Any())
 				return Ok(pacientes);
@@ -34,8 +36,10 @@ namespace Consultorio.Controllers
 		{
 			Paciente paciente = await _repository.GetPacienteByIdAsync(id);
 
-			if (paciente is not null)
-				return Ok(paciente);
+			PacienteDetailsDto pacienteRet = new PacienteDetailsDto(paciente.Id, paciente.Nome, paciente.Email, paciente.Celular, paciente.Consultas);
+
+			if (pacienteRet is not null)
+				return Ok(pacienteRet);
 			else
 				return BadRequest("Paciente não encontrado");
 		}

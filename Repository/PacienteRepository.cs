@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Consultorio.Context;
+using Consultorio.Models.Dto;
 using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +18,8 @@ namespace Consultorio.Repository
 			_context = context;
 		}
 
-		public async Task<IEnumerable<Paciente>> GetAllPacientesAsync()
-			=> await _context.Pacientes.AsNoTracking().Include(x => x.Consultas).ToListAsync();
+		public async Task<IEnumerable<PacienteDto>> GetAllPacientesAsync()
+			=> await _context.Pacientes.Select(x => new PacienteDto(x.Id, x.Nome)).AsNoTracking().ToListAsync();
 
 		public async Task<Paciente> GetPacienteByIdAsync(int id)
 		{
