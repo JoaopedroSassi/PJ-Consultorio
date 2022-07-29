@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Consultorio.Models.Entities;
 
-namespace Consultorio.Models.Dto.Paciente
+namespace Consultorio.Models.Dto
 {
 	public class PacienteDetailsDto
 	{
@@ -9,9 +8,9 @@ namespace Consultorio.Models.Dto.Paciente
 		public string Nome { get; set; }
 		public string Email { get; set; }
 		public string Celular { get; set; }
-		public List<Consulta> Consultas { get; set; }
+		public List<ConsultaDto> Consultas { get; set; }
 
-		public PacienteDetailsDto(int id, string nome, string email, string celular, List<Consulta> consultas)
+		public PacienteDetailsDto(int id, string nome, string email, string celular, List<ConsultaDto> consultas)
 		{
 			Id = id;
 			Nome = nome;
