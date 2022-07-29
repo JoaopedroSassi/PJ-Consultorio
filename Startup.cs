@@ -34,9 +34,11 @@ namespace Consultorio
 			});
 			services.AddCors();
 
+
 			//Dependency Inejections
 			services.AddScoped<IBaseRepository, BaseRepository>();
 			services.AddScoped<IPacienteRepository, PacienteRepository>();
+			services.AddAutoMapper(typeof(Startup));
 		}
 
 
