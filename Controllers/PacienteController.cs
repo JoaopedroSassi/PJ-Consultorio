@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Consultorio.Models.Dto;
 using Consultorio.Models.Dto.Paciente;
 using Consultorio.Models.Entities;
@@ -14,10 +15,12 @@ namespace Consultorio.Controllers
 	public class PacienteController : ControllerBase
 	{
 		private readonly IPacienteRepository _repository;
+		private readonly IMapper _mapper;
 
-		public PacienteController(IPacienteRepository repository)
+		public PacienteController(IPacienteRepository repository, IMapper mapper)
 		{
 			_repository = repository;
+			_mapper = mapper;
 		}
 
 		[HttpGet]
@@ -32,11 +35,11 @@ namespace Consultorio.Controllers
 		}
 
 		[HttpGet("{id:int}")]
-		public async Task<ActionResult<Paciente>> GetByIdAsync(int id)
+		public async Task<ActionResult<PacienteDetailsDto>> GetByIdAsync(int id)
 		{
 			Paciente paciente = await _repository.GetPacienteByIdAsync(id);
 
-			PacienteDetailsDto pacienteRet = new PacienteDetailsDto(paciente.Id, paciente.Nome, paciente.Email, paciente.Celular, paciente.Consultas);
+			PacienteDetailsDto pacienteRet = _mapper.Map<PacienteDetailsDto>(paciente);
 
 			if (pacienteRet is not null)
 				return Ok(pacienteRet);
