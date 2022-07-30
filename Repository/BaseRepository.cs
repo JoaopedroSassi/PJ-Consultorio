@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Consultorio.Context;
 using Consultorio.Repository.Interfaces;
 
@@ -14,7 +15,7 @@ namespace Consultorio.Repository
 
 		public void Add<T>(T entity) where T : class
 		{
-
+			_context.Add(entity);
 		}
 
 		public void Delete<T>(T entity) where T : class
@@ -27,9 +28,9 @@ namespace Consultorio.Repository
 
 		}
 
-		public bool SaveChanges()
+		public async Task<bool> SaveChangesAsync()
 		{
-			return true;
+			return await _context.SaveChangesAsync() > 0;
 		}
 	}
 }
