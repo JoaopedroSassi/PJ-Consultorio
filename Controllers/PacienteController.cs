@@ -63,5 +63,24 @@ namespace Consultorio.Controllers
 
 			return Ok("Paciente adicionado com sucesso!");
 		}
+
+		[HttpPut("{id:int}")]
+		public async Task<ActionResult<Paciente>> Put(int id, [FromBody] PacienteAtualizarDto model)
+		{
+			if (id <= 0)
+				return NotFound("Paciente não encontrado");
+
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			Paciente paciente = await _repository.GetPacienteByIdAsync(id);
+			paciente = _mapper.Map(model, paciente);
+
+			_repository.Update(paciente);
+			if (!(await _repository.SaveChangesAsync()))
+				return BadRequest("Erro ao atualizar paciente");
+
+			return Ok("Paciente atualizado com sucesso!");
+		}
 	}
 }
