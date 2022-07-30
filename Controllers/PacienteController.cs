@@ -45,5 +45,23 @@ namespace Consultorio.Controllers
 			else
 				return BadRequest("Paciente não encontrado");
 		}
+
+		[HttpPost]
+		public async Task<ActionResult<Paciente>> Post([FromBody] PacienteAdicionarDto model)
+		{
+			if (!ModelState.IsValid)
+				return BadRequest("Paciente inválido");
+
+			if (model is null)
+				return BadRequest("Paciente nulo");
+
+			Paciente pacienteAdd = _mapper.Map<Paciente>(model);
+
+			_repository.Add(pacienteAdd);
+			if (!(await _repository.SaveChangesAsync()))
+				return BadRequest("Erro ao salvar paciente");
+
+			return Ok("Paciente adicionado com sucesso!");
+		}
 	}
 }
