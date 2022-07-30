@@ -25,7 +25,7 @@ namespace Consultorio.Repository
 
 		public void Update<T>(T entity) where T : class
 		{
-
+			_context.Update(entity);
 		}
 
 		public async Task<bool> SaveChangesAsync()
