@@ -23,7 +23,11 @@ namespace Consultorio.Repository
 
 		public async Task<Paciente> GetPacienteByIdAsync(int id)
 		{
-			Paciente paciente = await _context.Pacientes.AsNoTracking().Include(x => x.Consultas).FirstOrDefaultAsync(x => x.Id == id);
+			Paciente paciente = await _context.Pacientes.AsNoTracking()
+										.Include(x => x.Consultas)
+										.ThenInclude(x => x.Especialidade)
+										.ThenInclude(x => x.Profissionais)
+										.FirstOrDefaultAsync(x => x.Id == id);
 
 			if (paciente is null)
 				return null;

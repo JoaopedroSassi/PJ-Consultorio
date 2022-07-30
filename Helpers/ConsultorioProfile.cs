@@ -9,6 +9,9 @@ namespace Consultorio.Helpers
 		public ConsultorioProfile()
 		{
 			CreateMap<Paciente, PacienteDetailsDto>();
+			CreateMap<Consulta, ConsultaDto>()
+				.ForMember(x => x.Especialidade, y => y.MapFrom(x => x.Especialidade.Nome))
+				.ForMember(x => x.Profissional, y => y.MapFrom(x => x.Profissional.Nome));
 		}
 	}
 }
