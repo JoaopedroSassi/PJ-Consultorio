@@ -12,6 +12,8 @@ namespace Consultorio.Helpers
 			CreateMap<Consulta, ConsultaDto>()
 				.ForMember(x => x.Especialidade, y => y.MapFrom(x => x.Especialidade.Nome))
 				.ForMember(x => x.Profissional, y => y.MapFrom(x => x.Profissional.Nome));
+
+			CreateMap<PacienteAdicionarDto, Paciente>();
 		}
 	}
 }
