@@ -38,6 +38,7 @@ namespace Consultorio
 			//Dependency Inejections
 			services.AddScoped<IBaseRepository, BaseRepository>();
 			services.AddScoped<IPacienteRepository, PacienteRepository>();
+			services.AddScoped<IProfissionalRepository, ProfissionalRepository>();
 			services.AddAutoMapper(typeof(Startup));
 		}
 

@@ -1,3 +1,4 @@
+using System.Linq;
 using AutoMapper;
 using Consultorio.Models.Dto;
 using Consultorio.Models.Entities;
@@ -15,6 +16,15 @@ namespace Consultorio.Helpers
 
 			CreateMap<PacienteAdicionarDto, Paciente>();
 			CreateMap<PacienteAtualizarDto, Paciente>()
+				.ForAllMembers(x => x.Condition((x, y, z) => z != null));
+
+			CreateMap<Profissional, ProfissionalDetalhesDto>()
+				.ForMember(x => x.TotalConsultas, y => y.MapFrom(z => z.Consultas.Count()))
+				.ForMember(x => x.Especialidades, y => y.MapFrom(z => z.Especialidades.Select(n => n.Nome).ToArray()));
+
+			CreateMap<ProfissionalAdicionarDto, Profissional>();
+
+			CreateMap<ProfissionalAtualizarDto, Profissional>()
 				.ForAllMembers(x => x.Condition((x, y, z) => z != null));
 		}
 	}
