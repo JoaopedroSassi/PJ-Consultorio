@@ -22,10 +22,15 @@ namespace Consultorio.Helpers
 				.ForMember(x => x.TotalConsultas, y => y.MapFrom(z => z.Consultas.Count()))
 				.ForMember(x => x.Especialidades, y => y.MapFrom(z => z.Especialidades.Select(n => n.Nome).ToArray()));
 
+			CreateMap<Profissional, ProfissionalDto>();
+
 			CreateMap<ProfissionalAdicionarDto, Profissional>();
 
 			CreateMap<ProfissionalAtualizarDto, Profissional>()
 				.ForAllMembers(x => x.Condition((x, y, z) => z != null));
+
+
+			CreateMap<Especialidade, EspecialidadeDetalhesDto>();
 		}
 	}
 }
